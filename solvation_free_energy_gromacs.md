@@ -25,8 +25,8 @@ tc-grps                 = System
 tau-t                   = 1.0
 ref-t                   = 298
 ; Pressure coupling
-pcoupl                  = Berendsen  ; use Berendsen for equilibriation and Parranello-Rahman for proudction
-tau-p                   = 0.5        ; 0.5 ps for Berendsen and 2.0 ps for Parranello-Rahman
+pcoupl                  = Berendsen  ; Berendsen for eq and Parrinello-Rahman for prod
+tau-p                   = 0.5        ; 0.5 ps for Berendsen and 2.0 ps for Parrinello-Rahman
 compressibility         = 4.5e-05
 ref-p                   = 1.0
 ; Constraints
@@ -69,8 +69,8 @@ tc-grps                 = System
 tau-t                   = 1.0
 ref-t                   = 298
 ; Pressure coupling
-pcoupl                  = Parranello-Rahman  ; use Berendsen for equilibriation and Parranello-Rahman for proudction
-tau-p                   = 2                  ; 0.5 ps for Berendsen and 2.0 ps for Parranello-Rahman
+pcoupl         = Parrinello-Rahman  ; Berendsen for eq and Parrinello-Rahman for prod
+tau-p                   = 2         ; 0.5 ps for Berendsen and 2.0 ps for Parrinello-Rahman
 compressibility         = 4.5e-05
 ref-p                   = 1.0
 ; Constraints
