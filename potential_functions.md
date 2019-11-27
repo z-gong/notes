@@ -1,4 +1,4 @@
-### Tang Toennies Damping
+### Tang-Toennies Damping
 
 $$
 f_{n}(r) = 1-c_{ij} \mathrm{e}^{-b_{ij}r} \sum_{k=0}^{n} \frac{(b_{ij} r)^{k}}{k !} \\
