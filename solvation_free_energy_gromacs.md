@@ -6,6 +6,7 @@
 - Write two *mdp* files for equilibriation and production run.  
   * Notice that *dt*, *nsteps*, *pcoupl*, *tau-p* and *nstdhdl* are different for eq and prod runs
   * Be careful about *init_lambda_state*
+  * *vdw_lamdbas* and *coul_lambdas* should be carefully chosen for different solutes and solvents. Though the follwing set of lambdas is applicable for most cases.
 ```ini
 ; eq.mdp
 
@@ -40,10 +41,9 @@ couple-intramol         = no
 couple-lambda0          = none     ; no interaction between solute and solvents when lambda=0
 couple-lambda1          = vdw-q    ; full interaction between solute and solvents when lambda=1
 init_lambda_state       = $lambda  ; will be replaced with a integer listed below later
-; lambda_states           0   1   2   3   4   5   6   7   8   9   10  11
-vdw_lambdas             = 0.0 0.2 0.3 0.4 0.6 0.8 1.0 1.0 1.0 1.0 1.0 1.0
-coul_lambdas            = 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.3 0.6 0.8 0.9 1.0
-calc_lambda_neighbors   = 2        ; if larger than 1, MBAR algorithm is used for BAR analysis
+; lambda_states           0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19
+vdw_lambdas             = 0.   0.1  0.2  0.25 0.3  0.35 0.4  0.45 0.5  0.6  0.7  0.8  1.   1.   1.   1.   1.   1.   1.   1.
+coul_lambdas            = 0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.3  0.6  0.7  0.8  0.9  0.95 1.
 nstdhdl                 = 0        ; donot calculate dhdl during equilibration
 sc-alpha                = 0.5
 sc-power                = 1
@@ -84,22 +84,21 @@ couple-intramol         = no
 couple-lambda0          = none      ; no interaction between solute and solvents when lambda=0
 couple-lambda1          = vdw-q     ; full interaction between solute and solvents when lambda=1
 init_lambda_state       = $lambda   ; will be replaced with a integer listed below later
-; lambda_states           0   1   2   3   4   5   6   7   8   9   10  11
-vdw_lambdas             = 0.0 0.2 0.3 0.4 0.6 0.8 1.0 1.0 1.0 1.0 1.0 1.0
-coul_lambdas            = 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.3 0.6 0.8 0.9 1.0
-calc_lambda_neighbors   = 2         ; if larger than 1, MBAR algorithm is used for BAR analysis
+; lambda_states           0    1    2    3    4    5    6    7    8    9    10   11   12   13   14   15   16   17   18   19
+vdw_lambdas             = 0.   0.1  0.2  0.25 0.3  0.35 0.4  0.45 0.5  0.6  0.7  0.8  1.   1.   1.   1.   1.   1.   1.   1.
+coul_lambdas            = 0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.   0.3  0.6  0.7  0.8  0.9  0.95 1.
 nstdhdl                 = 50        ; calculate dhdl every 0.1 ps
 sc-alpha                = 0.5
 sc-power                = 1
 sc-sigma                = 0.3
 ```
 
-- Generate directories and files for different lambdas. 12 lambda points in this case.
+- Generate directories and files for different lambdas. In this example, there are 20 lambda points
 ```bash
-for i in {00..11}; do mkdir lambda-$i; done
-for i in {00..11}; do cp conf.gro topol.top lambda-$i; done
-for i in {00..11}; do sed "s/\$lambda/$i/" _eq.mdp > lambda-$i/_eq.mdp; done
-for i in {00..11}; do sed "s/\$lambda/$i/" _prod.mdp > lambda-$i/_prod.mdp; done
+for i in {00..19}; do mkdir lambda-$i; done
+for i in {00..19}; do cp conf.gro topol.top lambda-$i; done
+for i in {00..19}; do sed "s/\$lambda/$i/" _eq.mdp > lambda-$i/_eq.mdp; done
+for i in {00..19}; do sed "s/\$lambda/$i/" _prod.mdp > lambda-$i/_prod.mdp; done
 ```
 
 ### Run simulations for all lambdas
