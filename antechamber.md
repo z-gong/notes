@@ -1,3 +1,4 @@
+Setup atom type and AM1BCC charge with OpenBabel and Ambertools
 ```
 obabel -:'Oc1ccccc1' -O step0.mol2 -h --gen3d
 ```
